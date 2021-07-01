@@ -1,0 +1,170 @@
+body {
+  margin: 0;
+  font-family: Roboto;
+  background-image: url("../images/joshuatree.jpg");
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+}
+* {
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+}
+h1 {
+  color: white;
+  text-align: center;
+  margin: 50px 0px 40px;
+  padding-top: 50px;
+}
+header {
+  padding: 20px 30px;
+  background: linear-gradient(145deg, hsl(224, 32%, 65%), hsl(0, 0%, 7%));
+  height: 60px;
+}
+header .header-container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 900px;
+  margin: 0 auto;
+}
+header .header-container nav {
+  display: flex;
+  height: fit-content;
+  align-self: flex-end;
+  gap: 10px;
+}
+header .header-container nav a {
+  color: #aaa;
+  font-size: small;
+  display: block;
+  font-weight: 500;
+}
+main {
+  max-width: 900px;
+  margin: 0 auto;
+}
+.about-page {
+  background-color: #000a;
+}
+.about-page p {
+  color: ghostwhite;
+  line-height: 1.5;
+  text-align: justify;
+  font-size: larger;
+  font-weight: 100;
+  padding: 30px;
+  padding-top: 10px;
+}
+.about-page .inspiration {
+  position: relative;
+  margin: 20px;
+  height: 800px;
+}
+.about-page .inspiration img {
+  width: 200px;
+  position: absolute;
+  border-radius: 5px;
+}
+.about-page .inspiration img:nth-child(1) {
+  top: 0;
+  left: 0;
+  width: 300px;
+}
+.about-page .inspiration img:nth-child(2) {
+  top: 10%;
+  right: 0;
+}
+.about-page .inspiration img:nth-child(3) {
+  left: 30%;
+  top: 30%;
+  width: 250px;
+}
+.about-page .bookshelf {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding: 25px;
+  background-color: hsl(34, 30%, 35%);
+  position: relative;
+  /*border: @shelf-thickness solid @shelf-color; //tips occurence je selecitone  le mot,  controle D et ca les selectionne
+    border-bottom: none;
+    margin: 20px;
+    */
+}
+.about-page .bookshelf .row {
+  box-shadow: inset 10px 10px 10px black;
+  box-sizing: content-box;
+  background-color: hsl(34, 30%, 25%);
+  height: 120px;
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+}
+.about-page .bookshelf .row .book {
+  background-color: cyan;
+  writing-mode: vertical-lr;
+  height: 100px;
+  padding: 5px 2px;
+  cursor: pointer;
+}
+.about-page .bookshelf .row .book.oblique {
+  transform: rotate(-25deg);
+  margin-left: 20px;
+}
+.about-page .bookshelf #book-info {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  z-index: 3;
+  background-color: rgba(255, 0, 0, 0.6);
+  padding: 20px;
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  border-radius: 4px;
+}
+.about-page .bookshelf #book-info.show {
+  display: flex !important;
+}
+.about-page .bookshelf #book-info h3 {
+  font-size: x-large;
+  color: white;
+  margin: 0;
+}
+.about-page .bookshelf #book-info .book-info-content {
+  display: flex;
+}
+.about-page .bookshelf #book-info .book-info-content img {
+  width: 200px;
+  object-fit: cover;
+}
+#modal-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: none;
+  cursor: pointer;
+}
+#modal-bg.show {
+  display: flex !important;
+}
+.close {
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  background: none;
+  font-size: 32px;
+  color: white;
+}

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./styles/global.css" />
+    <title>Nowon Music</title>
+  </head>
+  <body>
+    <header>
+      <div class="header-container">
+        <div>
+          <img
+            src="../images/logo_smallwhite.png"
+            alt="logo"
+            width="120"
+            height="10"
+          />
+        </div>
+        <nav>
+          <a href="/"> ACCUEIL </a>
+          <a href="./about.html"> PRESENTATION </a>
+        </nav>
+      </div>
+    </header>
+    <!--  insérer code page ici  -->
+    <main class="about-page">
+      <h1>Presentation</h1>
+      <p>
+        Hello, i compose, play, record and mix my own music. If you think that
+        my work can fit in anyway with yours please contact me !
+      </p>
+
+      <p>
+        I love music...i alway do. I like to combine, associate, reveal things
+        through that craft of sound, texture, rythme, notes... I dont have a
+        typical background and root so i hope this site (that i develop and
+        programm myself) will help you to get a glimpse of what i can (and not)
+        do.
+      </p>
+
+      <p>
+        I now lives and works from Europe where i play, compose, produce and
+        collaborate with a number of people. Rather than talking about my
+        background i would like to talk about some people from different areas
+        that inspire the way i see or feel music even thought there are not
+        neccessarely related to my discipline, but i see all them as genuine
+        artist (based on my definition of it, even if your discipline is not see
+        as an artistic discipline, it doesn't mean that you can not practice,
+        live it like an "artist" a kind of way of living); i would briefly
+        present each of them here as hommage, here are the sources i keep coming
+        back for many years now when i need inspiration.
+      </p>
+      <div class="bookshelf">
+        <div class="row">
+          <div class="book" onclick="openBook('kubrick')">Kubrick</div>
+          <div class="book" onclick="openBook('prince')">St Exupery</div>
+          <div class="book" onclick="openBook('argerich')">Argerich</div>
+          
+        </div>
+        <div class="row">
+          <div class="book" onclick="openBook('parker')">Parker</div>
+          <div class="book oblique" onclick="openBook('zidane')">Zidane</div>
+          <div class="book" onclick="openBook('duras')">Duras</div>
+          <div class="book" onclick="openBook('senna')">Senna</div>
+          <div class="book" onclick="openBook('bryant')">Bryant</div>
+          <div class="book" onclick="openBook('tyson')">Tyson</div>
+          <div class="book">Wenger</div>
+          <div class="book">Yokohama</div>
+          <div class="book">Chopin</div>
+          <div class="book">Minet</div>
+          <div class="book">Nolan</div>
+          <div class="book">Gattaca</div>
+          <div class="book">Spielberg</div>
+          <div class="book">Disney</div>
+          <div class="book oblique">Arsenal</div>
+        </div>
+        <div id="modal-bg"></div>
+        <div id="book-info">
+          <button class="close" onclick="closeBook()">
+            <i class="fas fa-times"></i>
+          </button>
+          <h3></h3>
+          <div class="book-info-content">
+            <img src="" alt="" />
+            <!--  en html contrairement a html img est une balise autofermante  (condition src et attribut alt texte pour erreur et les handicape) -->
+            <p></p>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="inspiration">
+        <img src="./images/inspiration/kubrick.jpg" alt="Kubrick" />
+        <img src="./images/inspiration/martita.jpg" alt="Martha Argerich" />
+        <img src="./images/inspiration/exupery.jpg" alt="Le petit prince" />
+       
+      </div> -->
+    </main>
+    <!--  fin du code page ici  -->
+    <script src="./js/about.js"></script>
+  </body>
+</html>

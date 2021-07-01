@@ -1,0 +1,219 @@
+@bg-header: linear-gradient(145deg, hsl(224, 32%, 65%), hsl(0, 0%, 7%));
+//hsl(hue(ton),saturation,luminosite//mieux que hexadecimal ou rgba plus humain, essayer transparence avec Daniel
+@header-height: 60px;
+//ca c du less, permet d 'avoir moins de class, permet de cibler precisement plusieurs balises ds les classe
+
+.inner-container() {
+  //mon mix in  ( fonction de Less) ici . () que fait le less !!!meme chose que fonction que j'invoquerai plus bas ds dautre classe
+  //equivalent d 'une fonction sauf qu'on peu stocker des proprietés et des valeurs
+  //c un espece d'include (pour factoriser), donc quand on le rappel on retape pas le code
+  max-width: 900px;
+  margin: 0 auto;
+  // "0"haut bas (vertical) et "auto" horizontal (pour le centrerà
+}
+//css pur ! pour tout ce qui est selecteur pas de . pas de # pas de @
+body {
+  margin: 0;
+  font-family: Roboto;
+  background-image: url("../images/joshuatree.jpg");
+  background-size: cover; //l'image reste au centre lorsque qu'on change de taille de fenetre
+  background-position: center;
+  min-height: 100vh; //vh c  en  % la hatueur hauteur de mon ecran
+}
+
+* {
+  //* tous les composant html obeissent a cette regle
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+  //virer le surligenemnt
+}
+
+h1 {
+  color: white;
+  text-align: center;
+  margin: 50px 0px 40px;
+  padding-top: 50px;
+
+  // margin  les chiffres en px =  haut les 2 cotés et le bas
+}
+
+header {
+  padding: 20px 30px;
+  background: @bg-header;
+  height: @header-height;
+
+  // . car class a nous, les classes prenne tjs un  point devant
+  .header-container {
+    //selecteur
+    display: flex;
+    justify-content: space-between;
+    .inner-container(); // pour les marges sur les cotés
+
+    //j'appelle le mix in, ici nav a pas de point balise html
+    nav {
+      display: flex;
+      height: fit-content;
+      align-self: flex-end;
+      gap: 10px;
+      a {
+        color: #aaa;
+        font-size: small;
+        display: block;
+        font-weight: 500;
+        //gere le gras (un peu comme bold mais en mieux)
+      }
+    }
+  }
+}
+main {
+  .inner-container();
+  //le fait de l'appeler plus bas sans retaper le code c du LESS, on aime l'appel
+  //par reference en developpement
+}
+
+.about-page {
+  background-color: #000a; //assombri la div le carré du de presentation
+  p {
+    //je selectionne mon paragraphe p
+    color: ghostwhite;
+    line-height: 1.5;
+    text-align: justify;
+    font-size: larger;
+    font-weight: 100; // on affine notre roboto qui permet une varieté de gras
+    //400 police normal 700 gras et entre
+    padding: 30px;
+    padding-top: 10px;
+  }
+
+  .inspiration {
+    position: relative;
+    margin: 20px;
+    height: 800px;
+    img {
+      width: 200px;
+      position: absolute;
+      border-radius: 5px;
+
+      &:nth-child(1) {
+        //nth enfant 1 (kubrick)
+        top: 0;
+        left: 0;
+        width: 300px;
+      }
+      &:nth-child(2) {
+        //nth enfant 2
+        top: 10%; //quand ya une valeur mettre le % contrairement a 0
+        right: 0;
+      }
+      &:nth-child(3) {
+        //nth enfant 3
+        //quand ya une valeur mettre le % contrairement a 0
+        left: 30%;
+        top: 30%;
+        width: 250px;
+      }
+    }
+  }
+  @shelf-color: hsl(34, 30%, 35%); //@ synthax pour les variables avec Less
+  @shelf-thickness: 25px;
+  .bookshelf {
+    display: flex;
+    flex-direction: column;
+    gap: @shelf-thickness;
+    padding: @shelf-thickness;
+    background-color: @shelf-color;
+    position: relative;
+
+    /*border: @shelf-thickness solid @shelf-color; //tips occurence je selecitone  le mot,  controle D et ca les selectionne
+    border-bottom: none;
+    margin: 20px;
+    */
+    .row {
+      box-shadow: inset 10px 10px 10px black;
+
+      box-sizing: content-box;
+      background-color: darken(
+        @shelf-color,
+        10%
+      ); //fonction de less qui permet d'assombrir les couleurs facilement (fade pour transparence, lighten pour le clair)
+      height: 120px;
+      display: flex;
+      align-items: flex-end;
+      //z-index: 1 ; // donne la priorité de la surposition plus le chiffre est gros plus c au dessu (ex le 10 sera devant)
+      gap: 2px; //ecart entre 2 element mes 2 livres ici
+      //border-bottom: @shelf-thickness solid @shelf-color;
+      .book {
+        background-color: cyan;
+        writing-mode: vertical-lr;
+        height: 100px;
+        padding: 5px 2px;
+        cursor: pointer;
+        &.oblique {
+          //raccourci less quand on est ds la classe book et oblique on aura cette proprieté
+          transform: rotate(-25deg); //deg = degré
+          margin-left: 20px;
+        }
+      }
+    }
+    #book-info {
+      //avec # je seletionne l 'id que j'ai cree dans le html
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      right: auto;
+      bottom: auto;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      z-index: 3;
+      background-color: fade(red, 60%);
+      padding: 20px;
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+      border-radius: 4px;
+
+      &.show {
+        display: flex !important; //important (priorité sur les autres proprieté display)
+      }
+      h3 {
+        font-size: x-large;
+        color: white;
+        margin: 0;
+      }
+      .book-info-content {
+        display: flex;
+        img {
+          width: 200px;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+}
+#modal-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2;
+  background-color: fade(black, 60%);
+  display: none;
+  cursor: pointer;
+  &.show {
+    display: flex !important; //important (priorité sur les autres proprieté display)
+  }
+}
+
+.close {
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  background: none;
+  font-size: 32px;
+  color: white;
+}
