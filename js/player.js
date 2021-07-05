@@ -1,43 +1,72 @@
 const iframeElement = document.querySelector("iframe");
-const iframeElementID = iframeElement.id;
-const widget1 = SC.Widget(iframeElement); //viens de l'api voir arboressence a gauche qui va interagir avec soundcloud
-//const widget2 = SC.Widget(iframeElementID);
+const widget = SC.Widget(iframeElement); //viens de l'api voir arboressence a gauche qui va interagir avec soundcloud
 //commande D pour selectionner
-console.log(widget1);
 const progressBar = document.querySelector("#progress");
- 
 
 //const playButton = document.querySelector("#play")
 
 let soundList = [];
 
 //initialisation du composant Soundcloud
-widget1.bind(SC.Widget.Events.READY, () => {
+widget.bind(SC.Widget.Events.READY, () => {
   //tout ce qui est widget vient de l'api.js
 
   //obtention des données des pistes
-  widget1.getSounds((list) => {
+  widget.getSounds((list) => {
     //méthode provenant de l'api
     soundList = list;
     //création des éléments pour la liste
-    //for (const sound of soundList) {
-
-    // }
-
     soundList.forEach((sound, index) => {
       //for each permet de prendre a la fois la piste et l'index ce que ne permet pas le for of (besoin de creer une variable etc)
       createTrack(sound, index);
     });
+
+    resetProgressBar(); //initialiser la barre de progression en fonction de la premiere piste
   });
 });
-widget1.bind(SC.Widget.Events.PLAY_PROGRESS, () => {
- 
-  widget1.getPosition((position)=>{
-    progressBar.setAttribute("value",position);
-  });
+
+widget.bind(SC.Widget.Events.PLAY_PROGRESS, () => {
+  setProgressFromWidget();
 });
+
+function setProgressFromWidget() {
+  //met a jour la barre à partir du lecteur Soundcloud
+  widget.getPosition((position) => {
+    progressBar.value = position;
+  });
+}
+
+function setProgressFromInput(ms) {
+  //met a jour la barre manuellement
+  widget.seekTo(ms);
+}
+
+function changeTrack(e, index) {
+  widget.getCurrentSoundIndex((currentindex) => {
+    const diff = Math.abs(currentindex - index);
+    if (index > currentindex) {
+      //si celui qu'on veut choisir est > que celui qu'on est ene train de jouer
+      for (let i = 0; i < diff; i++) {
+        widget.next();
+      }
+    } else {
+      for (let i = 0; i < diff; i++) {
+        widget.prev();
+      }
+    }
+    widget.seekTo(0); //force la reinitialisation de la piste a 0 au lieu de reprendre a l endroit de la denriere lecture
+    resetProgressBar(); //reinitialiser la barre de progression
+  });
+}
+
+function resetProgressBar() {
+  widget.getCurrentSound((sound) => {
+    progressBar.setAttribute("max", sound.duration);
+    setProgressFromWidget(); //appel pour forcer le refresh de la barre
+  });
+}
+
 function createTrack(sound, index) {
-  console.log(sound);
   const listDiv = document.querySelector(".tracklist");
 
   const element = document.createElement("div");
@@ -53,46 +82,9 @@ function createTrack(sound, index) {
   duration.textContent = getDisplayTime(sound.duration); //convertisseur ms en minute
   element.appendChild(duration);
 
-  element.addEventListener("click", () => {
-    widget1.getCurrentSoundIndex((currentindex) => {
-      const diff = Math.abs(currentindex - index);
-      if (index > currentindex) {
-        //si celui qu'on veut choisir est > que celui qu'on est ene train de jouer
-        for (let i = 0; i < diff; i++) {
-          widget1.next();
-        }
-      } else {
-        for (let i = 0; i < diff; i++) {
-          widget1.prev();
-        }
-      }
-      playMusic();
-    });
-  });
+  element.addEventListener("click", (e) => changeTrack(e, index));
 
   listDiv.appendChild(element);
-}
-
-function playMusic() {
-;
-  
-  
-  widget1.getCurrentSound((sound)=>{
-    progressBar.setAttribute("value", 0);
-  progressBar.setAttribute("min", 0);
-    progressBar.setAttribute("max", sound.duration); 
-    setPosition(0)
-    widget1.play();
-    widget1.getPosition((position)=>{
-     console.log(position);
-    });
-    
-  });
- 
-
-}
-function setPosition(ms) {
-widget1.seekTo(ms)
 }
 
 function getDisplayTime(ms) {
