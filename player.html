@@ -78,8 +78,9 @@
 
     <button id="play" onclick="playMusic()">PLAY</button>
     <div class="tracklist"></div>
+    <div class="progress-container">
     <input id="progress" type="range" value="0" oninput="setProgressFromInput(this.value)">
-
+  </div>
     <script src="./js/api.js"></script>
     <!-- tjs mettre en premier les scripts externe ici mon api , ou boostrap-->
     <script src="./js/player.js"></script>

@@ -169,19 +169,30 @@ main {
   color: white;
 }
 .tracklist {
-  background: pink;
   display: flex;
   flex-direction: column;
 }
 .tracklist .track {
   display: flex;
   cursor: pointer;
+  border-top: 1px solid silver;
+  border-bottom: 1px solid darkgray;
 }
 .tracklist .track .track-title {
   margin: 0;
   width: 80%;
+  padding: 10px;
+  border-right: 1px solid darkgray;
 }
 .tracklist .track .track-duration {
   margin: 0;
   width: 20%;
+  border-left: 1px solid silver;
+  padding: 10px;
+}
+.progress-container {
+  padding: 10px;
+}
+.progress-container input[type="range"] {
+  width: 100%;
 }

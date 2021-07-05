@@ -219,23 +219,35 @@ main {
 }
 
 .tracklist {
-  background: pink;
-  display:flex;
+  //background: pink;
+  display: flex;
   flex-direction: column;
 }
 
 .tracklist .track {
-  display:flex;
-  cursor:pointer; //icone clickable
-
+  display: flex;
+  cursor: pointer; //icone clickable
+  border-top: 1px solid silver;
+  border-bottom: 1px solid darkgray;
+  //background: linear-gradient(lighten(silver,30%),darken(silver,30%));
 }
 
 .tracklist .track .track-title {
   margin: 0;
   width: 80%;
+  padding: 10px;
+  border-right: 1px solid darkgray;
 }
 
 .tracklist .track .track-duration {
   margin: 0;
   width: 20%;
+  border-left: 1px solid silver;
+  padding: 10px;
+}
+.progress-container {
+  padding: 10px;
+}
+.progress-container input[type="range"] {
+  width: 100%;
 }
