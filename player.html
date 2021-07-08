@@ -36,7 +36,7 @@
         </nav>
       </div>
     </header>
-      <!--  insérer code page ici  -->
+    <!--  insérer code page ici  -->
     <iframe
       width="100%"
       height="300"
@@ -76,11 +76,18 @@
       >
     </div>
 
-    <button id="play" onclick="playMusic()">PLAY</button>
-    <div class="tracklist"></div>
-    <div class="progress-container">
-    <input id="progress" type="range" value="0" oninput="setProgressFromInput(this.value)">
-  </div>
+    <div class="player-container">
+      <button id="play" onclick="togglePlay()">PLAY</button>
+      <div class="tracklist"></div>
+      <div class="progress-container">
+        <input
+          id="progress"
+          type="range"
+          value="0"
+          oninput="setProgressFromInput(this.value)"
+        />
+      </div>
+    </div>
     <script src="./js/api.js"></script>
     <!-- tjs mettre en premier les scripts externe ici mon api , ou boostrap-->
     <script src="./js/player.js"></script>

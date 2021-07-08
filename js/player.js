@@ -22,7 +22,7 @@ widget.bind(SC.Widget.Events.READY, () => {
       //for each permet de prendre a la fois la piste et l'index ce que ne permet pas le for of (besoin de creer une variable etc)
       createTrack(sound, index);
     });
-
+setTrackIndex(0); //selectionner automatiquement la premiere piste
     resetProgressBar(); //initialiser la barre de progression en fonction de la premiere piste
   });
 });
@@ -41,6 +41,17 @@ function setProgressFromWidget() {
 function setProgressFromInput(ms) {
   //met a jour la barre manuellement
   widget.seekTo(ms);
+}
+
+function togglePlay() {
+  widget.isPaused((bool)=>{
+    if(bool) {
+      widget.play();
+    }
+    else {
+      widget.pause();
+    }
+  })
 }
 
 function setTrackIndex(newIndex) {
