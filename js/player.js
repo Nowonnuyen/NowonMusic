@@ -1,11 +1,13 @@
 const iframeElement = document.querySelector("iframe");
 const widget = SC.Widget(iframeElement); //viens de l'api voir arboressence a gauche qui va interagir avec soundcloud
 //commande D pour selectionner
+const listDiv = document.querySelector(".tracklist");
 const progressBar = document.querySelector("#progress");
 
 //const playButton = document.querySelector("#play")
 
 let soundList = [];
+let trackIndex = 0;
 
 //initialisation du composant Soundcloud
 widget.bind(SC.Widget.Events.READY, () => {
@@ -41,7 +43,17 @@ function setProgressFromInput(ms) {
   widget.seekTo(ms);
 }
 
+function setTrackIndex(newIndex) {
+  trackIndex = newIndex;
+  widget.getCurrentSoundIndex((currentindex) => {
+    const tracks = listDiv.children;
+    tracks.item(currentindex).classList.remove("selected");
+    tracks.item(newIndex).classList.add("selected");
+  });
+}
+
 function changeTrack(e, index) {
+  setTrackIndex(index);
   widget.getCurrentSoundIndex((currentindex) => {
     const diff = Math.abs(currentindex - index);
     if (index > currentindex) {
@@ -67,8 +79,6 @@ function resetProgressBar() {
 }
 
 function createTrack(sound, index) {
-  const listDiv = document.querySelector(".tracklist");
-
   const element = document.createElement("div");
   element.classList.add("track");
 

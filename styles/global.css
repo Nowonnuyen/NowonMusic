@@ -178,6 +178,9 @@ main {
   border-top: 1px solid silver;
   border-bottom: 1px solid darkgray;
 }
+.tracklist .track.selected {
+  color: orangered;
+}
 .tracklist .track .track-title {
   margin: 0;
   width: 80%;
