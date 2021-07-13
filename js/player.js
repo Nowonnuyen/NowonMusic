@@ -3,14 +3,15 @@ const widget = SC.Widget(iframeElement); //viens de l'api voir arboressence a ga
 //commande D pour selectionner
 const listDiv = document.querySelector(".tracklist");
 const progressBar = document.querySelector("#progress");
-
-//const playButton = document.querySelector("#play")
+const playButton = document.querySelector("#play");
+const playButtonInner = document.querySelector("#play .inner-circle");
 
 let soundList = [];
 let trackIndex = 0;
 
 //initialisation du composant Soundcloud
-widget.bind(SC.Widget.Events.READY, () => {
+widget.bind(SC.Widget.Events.READY, () => { //fonction anonyme tu met fonction a la place de () meme chose, on utilise ca 
+  //pour les callback pour raccourir le code et plus expressif la fleche nous donne l'idee d un truc qui va se porduire un effet
   //tout ce qui est widget vient de l'api.js
 
   //obtention des données des pistes
@@ -22,7 +23,7 @@ widget.bind(SC.Widget.Events.READY, () => {
       //for each permet de prendre a la fois la piste et l'index ce que ne permet pas le for of (besoin de creer une variable etc)
       createTrack(sound, index);
     });
-setTrackIndex(0); //selectionner automatiquement la premiere piste
+    setTrackIndex(0); //selectionner automatiquement la premiere piste
     resetProgressBar(); //initialiser la barre de progression en fonction de la premiere piste
   });
 });
@@ -44,14 +45,25 @@ function setProgressFromInput(ms) {
 }
 
 function togglePlay() {
-  widget.isPaused((bool)=>{
-    if(bool) {
+  widget.isPaused((bool) => {
+    if (bool) {
       widget.play();
-    }
-    else {
+      setPlayButtonIcon(true);
+    } else {
       widget.pause();
+      setPlayButtonIcon(false);
     }
-  })
+  });
+}
+
+function setPlayButtonIcon(isPlaying) {
+  if (isPlaying) {
+    playButtonInner.innerHTML = "<i class='fas fa-pause'></i>";
+    playButton.classList.add("playing");
+  } else {
+    playButtonInner.innerHTML = "<i class='fas fa-play'></i>";
+    playButton.classList.remove("playing");
+  }
 }
 
 function setTrackIndex(newIndex) {

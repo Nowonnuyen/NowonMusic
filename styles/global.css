@@ -176,18 +176,44 @@ main {
   padding: 20px;
 }
 #play {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100px;
   height: 100px;
   border: none;
   border-radius: 50%;
-  background: linear-gradient(145deg, #f0f0f0, #cacaca);
+  background-image: linear-gradient(145deg, #f0f0f0, #cacaca);
   box-shadow: 11px 11px 23px #bebebe, -11px -11px 23px #ffffff;
+  font-size: x-large;
+  color: #555;
+  cursor: pointer;
+}
+#play.playing i {
+  color: #ff581a;
+  text-shadow: -1px -1px 12px orangered;
+}
+#play:active {
+  background-image: linear-gradient(145deg, #cacaca, #f0f0f0);
+  box-shadow: 11px 11px 23px #bebebe, -11px -11px 23px #fff;
+}
+#play .inner-circle {
+  width: 90%;
+  height: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: linear-gradient(145deg, #f0f0f0, #cacaca);
+  border-radius: 50%;
+}
+#play:active .inner-circle {
+  background-image: linear-gradient(145deg, #cacaca, #f0f0f0);
 }
 .tracklist {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-top: 15px;
+  margin-top: 30px;
   width: 100%;
   max-width: 900px;
 }
@@ -195,12 +221,16 @@ main {
   display: flex;
   cursor: pointer;
 }
-/* .track + .track {
-margin-top: 10px ;
-
-} */
+.tracklist .track:active {
+  background-image: linear-gradient(145deg, #cacaca, #f0f0f0);
+  box-shadow: 5px 5px 11px #bebebe, -5px -5px 11px #eee;
+  border-radius: 10px;
+}
 .tracklist .track.selected {
   color: orangered;
+  background-image: #cacaca;
+  box-shadow: 5px 5px 11px #bebebe, -5px -5px 11px #eee;
+  border-radius: 10px;
 }
 .tracklist .track .track-title {
   margin: 0;
@@ -217,6 +247,7 @@ margin-top: 10px ;
   padding: 10px;
   width: 40%;
   max-width: 900px;
+  margin-top: 20px;
 }
 #progress {
   width: 100%;
